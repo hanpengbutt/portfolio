@@ -1,1 +1,83 @@
 @import "tailwindcss";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+@theme {
+  /* Primitive Colors */
+  --color-white: #FFFFFF;
+  --color-gray-200: #CDCDCD;
+  --color-gray-600: #727272;
+  --color-gray-900: #121212;
+
+  /* Semantic Colors */
+  --color-text-primary: var(--color-gray-900);
+  --color-text-secondary: var(--color-gray-600);
+  --color-border-default: var(--color-gray-900);
+  --color-border-subtle: var(--color-gray-200);
+
+  /* Font Families */
+  --font-brand: "Rascal";
+  --font-base: "Pretendard Variable";
+}
+
+@utility text-brand-logo {
+  font-family: var(--font-brand);
+  font-weight: 400;
+  font-size: 92px;
+  line-height: 100px;
+}
+
+@utility text-display-xl {
+  font-family: var(--font-base);
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 56px;
+}
+
+@utility text-display-lg {
+  font-family: var(--font-base);
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 48px;
+}
+
+@utility text-heading-lg {
+  font-family: var(--font-base);
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 42px;
+}
+
+@utility text-heading-md {
+  font-family: var(--font-base);
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 34px;
+}
+
+@utility text-heading-sm {
+  font-family: var(--font-base);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+@utility text-body-lg {
+  font-family: var(--font-base);
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 34px;
+}
+
+@utility text-body-md {
+  font-family: var(--font-base);
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+@utility text-body-sm {
+  font-family: var(--font-base);
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 22px;
+}
