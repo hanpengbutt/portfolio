@@ -2,6 +2,8 @@
 @import "tailwindcss";
 
 @theme {
+  --color-*: initial;
+
   /* Primitive Colors */
   --color-white: #FFFFFF;
   --color-gray-200: #CDCDCD;
