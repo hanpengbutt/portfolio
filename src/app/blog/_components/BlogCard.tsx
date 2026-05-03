@@ -33,7 +33,7 @@ export default function BlogCard({
       </h3>
 
       {/* Description */}
-      <p className="text-body-sm text-text-primary line-clamp-2 w-full">
+      <p className="text-body-sm text-text-secondary line-clamp-2 w-full">
         {description}
       </p>
 
