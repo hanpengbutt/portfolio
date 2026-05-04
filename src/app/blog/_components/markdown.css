@@ -1,0 +1,94 @@
+@reference "../../globals.css";
+
+@layer components {
+
+  /* 기본 텍스트 스타일 지정 */
+  .markdown-body {
+    @apply text-body-md text-text-primary;
+  }
+
+  /* 제목 태그 (Heading) */
+  .markdown-body h1 {
+    @apply text-heading-lg text-text-primary mb-6 mt-10;
+  }
+
+  .markdown-body h2 {
+    @apply text-heading-md text-text-primary mb-4 mt-8 pb-2;
+  }
+
+  .markdown-body h3 {
+    @apply text-heading-sm text-text-primary mb-4 mt-6;
+  }
+
+  .markdown-body h4 {
+    @apply text-body-md text-text-primary mb-4 mt-6 font-bold;
+  }
+
+  /* 본문 텍스트 (Paragraph) */
+  .markdown-body p {
+    @apply mb-6 leading-relaxed;
+  }
+
+  /* 텍스트 강조 (Bold) */
+  .markdown-body strong {
+    @apply font-bold;
+  }
+
+  /* 하이퍼링크 (Link) */
+  .markdown-body a {
+    @apply transition-colors text-text-secondary underline hover:text-text-primary;
+  }
+
+  /* 이미지 (Image) */
+  .markdown-body img {
+    @apply my-8 w-full rounded-[20px] object-cover;
+  }
+
+  /* 인용문 (Blockquote) */
+  .markdown-body blockquote {
+    @apply border-border-default text-text-secondary my-6 border-l-4 pl-4 italic;
+  }
+
+  /* 리스트 (List) */
+  .markdown-body ul {
+    @apply mt-2 list-inside list-disc pl-2 mb-2;
+  }
+
+  .markdown-body ol {
+    @apply mt-2 list-inside list-decimal pl-2 mb-2;
+  }
+
+  .markdown-body li {
+    @apply mb-2;
+  }
+
+  /* 구분선 (HR) */
+  .markdown-body hr {
+    @apply border-border-subtle my-10 border-t;
+  }
+
+  /* 표 (Table) */
+  .markdown-body table {
+    @apply border-border-subtle my-8 w-full border-collapse border text-left;
+  }
+
+  .markdown-body th {
+    @apply border-border-subtle bg-[#f9fafb] px-4 py-3 font-bold border;
+  }
+
+  .markdown-body td {
+    @apply border-border-subtle px-4 py-3 border;
+  }
+
+  /* 코드 블록 (Code & Pre) */
+  .markdown-body pre code {
+    @apply rounded-xl p-4 my-6 text-body-sm font-code;
+  }
+
+  .markdown-body p code,
+  .markdown-body li code,
+  .markdown-body td code,
+  .markdown-body th code {
+    @apply bg-[#f3f4f6] text-[#eb5757] px-1.5 py-0.5 rounded-md text-sm font-code;
+  }
+}
