@@ -9,19 +9,19 @@
 
   /* 제목 태그 (Heading) */
   .markdown-body h1 {
-    @apply text-heading-lg text-text-primary mb-6 mt-10;
+    @apply text-heading-lg text-text-primary mb-6 mt-10 scroll-mt-25;
   }
 
   .markdown-body h2 {
-    @apply text-heading-md text-text-primary mb-4 mt-8 pb-2;
+    @apply text-heading-md text-text-primary mb-4 mt-8 pb-2 scroll-mt-25;
   }
 
   .markdown-body h3 {
-    @apply text-heading-sm text-text-primary mb-4 mt-6;
+    @apply text-heading-sm text-text-primary mb-4 mt-6 scroll-mt-25;
   }
 
   .markdown-body h4 {
-    @apply text-body-md text-text-primary mb-4 mt-6 font-bold;
+    @apply text-body-md text-text-primary mb-4 mt-6 font-bold scroll-mt-25;
   }
 
   /* 본문 텍스트 (Paragraph) */
