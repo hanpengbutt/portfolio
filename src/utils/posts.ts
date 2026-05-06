@@ -6,6 +6,7 @@ import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
 import rehypeHighlight from "rehype-highlight";
 import rehypeStringify from "rehype-stringify";
+import rehypeSlug from "rehype-slug";
 
 const POSTS_DIR = path.join(process.cwd(), "_posts");
 
@@ -20,6 +21,12 @@ export interface Post {
   id: string; // The filename without .md
   meta: PostMeta;
   content: string;
+}
+
+export interface TocItem {
+  id: string;
+  text: string;
+  level: number;
 }
 
 // 재귀적으로 폴더 내의 모든 .md 파일 경로를 찾는 헬퍼 함수
@@ -81,12 +88,48 @@ export function getPostById(id: string): Post | null {
   }
 }
 
+export function getPostHeadings(content: string): TocItem[] {
+  // # 또는 ##으로 시작하는 행을 찾습니다.
+  const headingRegex = /^(#{1,2})\s+(.+)$/gm;
+  const headings: TocItem[] = [];
+  const slugCounts = new Map<string, number>(); // 중복 횟수 추적용 맵
+  let match;
+
+  while ((match = headingRegex.exec(content)) !== null) {
+    const level = match[1].length;
+    const text = match[2];
+    // rehype-slug와 일치하도록 ID 생성 (한글 포함 고려)
+    let slug = text
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s가-힣-]/g, "") // 특수문자 제거 (공백은 보존)
+      .replace(/\s/g, "-"); // "모든" 공백을 각각 하이픈으로 변환 (+ 제거)
+
+    // 중복 ID 처리 (github-slugger 방식: 첫 번째는 그대로, 두 번째부터 -1, -2...)
+    if (slugCounts.has(slug)) {
+      const count = slugCounts.get(slug)!;
+      const newCount = count + 1;
+      slugCounts.set(slug, newCount);
+      slug = `${slug}-${count}`;
+    } else {
+      slugCounts.set(slug, 1);
+    }
+
+    headings.push({ id: slug, text, level });
+  }
+
+  return headings;
+}
+
 export async function getPostHtml(content: string): Promise<string> {
+  // rehype-slug 라이브러리를 동적으로 가져와야 할 수도 있습니다 (ESM)
+  // 여기선 일단 파이프라인에 추가하는 방향으로 제안합니다.
   const processedContent = await remark()
     .use(remarkGfm)
-    .use(remarkRehype) // 마크다운 AST를 HTML AST로 변환
-    .use(rehypeHighlight) // 코드 블록 구문 강조 적용
-    .use(rehypeStringify) // HTML AST를 문자열로 변환
+    .use(remarkRehype)
+    .use(rehypeHighlight)
+    .use(rehypeSlug)
+    .use(rehypeStringify)
     .process(content);
   return processedContent.toString();
 }
