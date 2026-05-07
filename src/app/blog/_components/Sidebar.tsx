@@ -1,11 +1,17 @@
 import { cn } from "@/utils/cn";
+import Link from "next/link";
 
 interface SidebarProps {
   categories: string[];
+  activeCategory?: string;
   className?: string;
 }
 
-export default function Sidebar({ categories, className = "" }: SidebarProps) {
+export default function Sidebar({
+  categories,
+  activeCategory = "ALL",
+  className = "",
+}: SidebarProps) {
   return (
     <aside
       className={cn(
@@ -14,9 +20,18 @@ export default function Sidebar({ categories, className = "" }: SidebarProps) {
       )}
     >
       {categories.map((category) => (
-        <p key={category} className="cursor-pointer">
+        <Link
+          key={category}
+          href={category === "ALL" ? "/blog" : `/blog/${category}`}
+          className={cn(
+            "cursor-pointer",
+            activeCategory === category
+              ? "text-text-primary underline underline-offset-4"
+              : "text-text-secondary",
+          )}
+        >
           {category}
-        </p>
+        </Link>
       ))}
     </aside>
   );

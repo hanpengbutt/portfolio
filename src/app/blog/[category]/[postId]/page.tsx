@@ -1,30 +1,31 @@
 import {
-  getAllPostIds,
+  getAllPosts,
   getPostById,
   getPostHtml,
   getPostHeadings,
 } from "@/utils/posts";
 import { notFound } from "next/navigation";
-import Frontmatter from "../_components/Frontmatter";
-import Toc from "../_components/Toc";
-import Comments from "../_components/Comments";
-import "../_components/markdown.css";
+import Frontmatter from "@/app/blog/_components/Frontmatter";
+import Toc from "@/app/blog/_components/Toc";
+import Comments from "@/app/blog/_components/Comments";
+import "@/app/blog/_components/markdown.css";
 import "highlight.js/styles/github-dark.css";
 
 export const dynamicParams = false;
 
-// SSG를 위해 빌드 시점에 생성할 파라미터(postId) 배열을 리턴
+// SSG를 위해 빌드 시점에 생성할 파라미터(category, postId) 배열을 리턴
 export function generateStaticParams() {
-  const postIds = getAllPostIds();
-  return postIds.map((postId) => ({
-    postId: postId,
+  const posts = getAllPosts();
+  return posts.map((post) => ({
+    category: post.meta.tag,
+    postId: post.id,
   }));
 }
 
 export default async function BlogPostPage({
   params,
 }: {
-  params: Promise<{ postId: string }>;
+  params: Promise<{ category: string; postId: string }>;
 }) {
   const { postId } = await params;
   const post = getPostById(postId);
